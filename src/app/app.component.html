@@ -1,0 +1,39 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 py-4 text-center">
+			<h1>Orders</h1>
+		</div>
+	</div>
+	<ng-container *ngIf="data$ | async as data">
+		<div class="row justify-content-center">
+			<div class="col-md-12 py-4">
+				<table>
+					<thead>
+						<tr>
+							<td *ngFor="let item of data.Items[0] | keyvalue">
+								{{item.key}}
+							</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let item of data.Items" (click)="openModal(item)">
+							<td>{{ item.Discount }}</td>
+							<td>{{ item.ProductName }}</td>
+							<td>{{ item.Quantity }}</td>
+							<td>{{ item.QuantityPerUnit }}</td>
+							<td
+								[ngStyle]="{'background-color':item.ShipCity === 'Rio de Janeiro' ? 'yellow' : 'white'}">
+								{{ item.ShipCity }}</td>
+							<td [ngStyle]="{'background-color':item.ShipCountry === 'France' ? 'red' : 'white' 
+                        && item.ShipCountry === 'Germany' ? 'green' : 'white'}"> {{ item.ShipCountry }} </td>
+							<td>{{ item.UnitPrice }}</td>
+							<td>{{ item["UnitPrice (Products)"]}}</td>
+							<td>{{ item.UnitsInStock }}</td>
+							<td>{{ item.UnitsOnOrder }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</ng-container>
+</div>
